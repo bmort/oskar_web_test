@@ -18,18 +18,18 @@ def main():
         os.makedirs(output_path)
 
     env = Environment(
-        loader=PackageLoader('oskar', 'templates'),
+        loader=PackageLoader('oskar_web', 'templates'),
         autoescape=select_autoescape(['html', 'xml'])
     )
     template = env.get_template('home.html')
     config=dict(new_release=True)
     html = template.render(**config)
 
-    f = open(os.path.join(output_path, 'oskar.html'), 'w')
+    f = open(os.path.join(output_path, 'index.html'), 'w')
     f.write(html)
 
     for folder in ['static', 'assets']:
-        copy_tree(os.path.join('oskar', folder),
+        copy_tree(os.path.join('oskar_web', folder),
                   os.path.join(output_path, folder))
 
 
