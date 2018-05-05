@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+{% if new_release %}
+<div class="alert alert-info">
+    <strong>New Release!</strong> OSKAR 2.7.0 released!
+</div>
+{% endif %}
+
+<div class="starter-template">
+    <h1>Welcome to the OSKAR simulator!</h1>
+    <p class="lead">The OSKAR simulator is ...</p>
+</div>
+
+{% endblock %}

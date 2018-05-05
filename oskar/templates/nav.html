@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #131339;">
+
+  <a class="navbar-brand" href="#">OSKAR</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a class="nav-link active" href="/">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Releases</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="/">Current Release</a>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Releases:</h6>
+          {% for release in releases %}
+          <a class="dropdown-item" href="/{{ release['version'] }}">{{ release['version'] }}</a>
+          {% endfor %}
+        </div>
+      </li>
+
+      {% if downloads %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Downloads</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          {% for download in downloads %}
+          <a class="dropdown-item" href="#">{{ download['name'] }}</a>
+          {% endfor %}
+        </div>
+      </li>
+      {% endif %}
+
+    </ul>
+
+  </div>
+</nav>

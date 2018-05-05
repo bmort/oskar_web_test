@@ -1,0 +1,5 @@
+**/__pycache__/
+/static_site/
+**/.DS_Store
+/oskar/assets
+**/*.png

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<div class="starter-template">
+    <h1>Release xxx</h1>
+    <p class="lead">Use this document as a way to quickly start any new project.
+        <br> All you get is this text and a mostly barebones HTML document.</p>
+    <ul>
+        {% for doc in releases['docs'] %}
+        <li>{{ doc }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
