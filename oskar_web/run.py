@@ -29,20 +29,30 @@ def _get_releases():
 
 RELEASES = _get_releases()
 
+
 @APP.route('/')
 def home():
     """."""
     config=dict(new_release=True, releases=RELEASES)
     return render_template('home.html', **config)
 
-@APP.route('/<version>')
+
+@APP.route('/release/<version>')
 def release(version):
     """."""
     config=dict(releases=RELEASES)
     return render_template('release.html', **config)
 
-@APP.route('/about')
-def about():
+
+@APP.route('/faq')
+def faq():
     """."""
     config=dict(releases=RELEASES)
-    return render_template('about.html', **config)
+    return render_template('faq.html', **config)
+
+
+@APP.route('/documentation')
+def documentation():
+    """."""
+    config = dict(releaes=RELEASES)
+    return render_template('documentation.html', **config)

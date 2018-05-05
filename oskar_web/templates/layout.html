@@ -9,16 +9,16 @@
   <link rel='icon' href='static/favicon.ico' type='image/x-icon' />
 
   <!-- CSS -->
-  <link href="static/css/bootstrap.min.css" rel="stylesheet">
-  <link href="static/css/starter-template.css" rel="stylesheet">
+  <link href="/static/css/bootstrap.css" rel="stylesheet">
+  <link href="/static/css/fontawesome-all.css" rel="stylesheet">
+  <link href="/static/css/starter-template.css" rel="stylesheet">
+
 
   <title>OSKAR</title>
 </head>
 
 <body>
-  <script src="static/js/jquery-3.3.1.slim.min.js"></script>
-  <script src="static/js/popper.min.js"></script>
-  <script src="static/js/bootstrap.min.js"></script>
+
 
   {% include 'nav.html' %}
 
@@ -27,18 +27,16 @@
     {% block body %}{% endblock %}
   </main>
 
-
-
-
-
-
   <footer class="bd-footer text-muted">
+      <hr>
     <div class="container">
-        <p>footer...</p>
+        <p class="text-right">OSKAR is licensed under the terms of the 3-clause BSD License.</p>
       <ul class="bd-footer-links">
-        <a href="https://github.com/OxfordSKA/OSKAR">GitHub</a>
+        <a href="https://github.com/OxfordSKA/OSKAR">
+            <p class="text-right">
+            <i class="fab fa-github"></i> GitHub</p>
+        </a>
       </ul>
-
     </div>
   </footer>
 
@@ -46,16 +44,18 @@
 
   <!-- Attempt to change the active menu item ... -->
   <!-- At the moment this seems not to stick after the new page loads  -->
-  <script>
+  <!-- <script>
     $(".nav-link").on("click", function () {
       $(".nav-link").find(".active").removeClass("active");
       $(this).addClass("active");
       // $(this).hide()
       console.log($(this).html())
     });
-  </script>
+  </script> -->
 
-
+<script src="/static/js/jquery-3.3.1.slim.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.js"></script>
 </body>
 
 </html>

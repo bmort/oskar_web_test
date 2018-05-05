@@ -1,9 +1,8 @@
-{% extends 'layout.html' %}
-
-{% block body %}
-
-{% if new_release %}
-<div class="alert alert-info">
+{% extends 'layout.html' %} {% block body %} {% if new_release %}
+<div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+    </button>
     <strong>New Release!</strong>
     <a href="/releases/2.7.0">OSKAR 2.7.0</a> released!
 </div>
@@ -11,7 +10,22 @@
 
 <div class="starter-template">
     <h1>Welcome to the OSKAR simulator!</h1>
-    <p class="lead">The OSKAR simulator is ...</p>
+    <p class="lead text-center">A GPU accelerated interferometer simulator
+        for the <a href="https://www.skatelescope.org/">Square Kilometre Array</a>.
+    </p>
 </div>
+
+<div class="container-fluid">
+    <div class="row justify-content-sm-center">
+        <div class="col-sm">
+            <p class="text-center">
+                OSKAR has been designed to produce simulated visibility data
+                from radio telescopes containing aperture arrays, such as
+                those envisaged for the Square Kilometre Array.
+            </p>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
