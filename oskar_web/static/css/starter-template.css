@@ -4,7 +4,7 @@ body {
 
 
 .text-muted {
-  background-color: coral;
+  background-color: #f7faff;
 }
 
 .starter-template {
@@ -18,7 +18,7 @@ body {
 
 .bd-footer p {
   margin-bottom: 0;
-  background-color: coral;
+  background-color: #f7faff;
 }
 
 @media (min-width:576px) {
