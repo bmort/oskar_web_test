@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #131339;">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #131339;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
     OSKAR Simulator
@@ -32,14 +32,13 @@
 
         <li class="nav-item">
           <a class={% if request.path=="/faq" %} "nav-link active"{% else %} "nav-link"{% endif%} href="/faq">
-<i class="fas fa-question-circle"></i> FAQ</a> 
+              <i class="fas fa-question-circle"></i> FAQ</a>
         </li>
 
         <!-- Downloads & Releases -->
         <li class="nav-item dropdown">
-            {% if 'downloads' in request.path %}
-            <a class="nav-link dropdown-toggle active" href="/downloads" id="dropdown01"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {% if 'downloads' in request.path %}
+          <a class="nav-link dropdown-toggle active" href="/downloads" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {% else %}
             <a class="nav-link dropdown-toggle" href="/downloads" id="dropdown01"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,36 +48,19 @@
         </a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
 
-            <h6 class="dropdown-header">Releases:</h6>
-            {% for release in data['releases'].keys() %}
-            {% if release in request.url %}
-            <a class="dropdown-item active" href="/downloads/{{ release }}">OSKAR-{{ release }}</a>
-            {% else %}
-            <a class="dropdown-item" href="/downloads/{{ release }}">OSKAR-{{ release }}</a>
-            {% endif %}
-            {% endfor %}
+            <h6 class="dropdown-header">Releases:</h6> {% for release in data['releases'].keys() %} {% if release in request.url %}
+            <a class="dropdown-item active" href="/downloads/{{ release }}">OSKAR-{{ release }}</a> {% else %}
+            <a class="dropdown-item" href="/downloads/{{ release }}">OSKAR-{{ release }}</a> {% endif %} {% endfor %}
 
             <!-- <div class="dropdown-divider"></div> -->
 
-            <h6 class="dropdown-header">Data:</h6>
-
-            {% if 'telescopes' in request.url %}
-            <a class="dropdown-item active" href="/downloads/telescopes">Telescope Models</a>
-            {% else %}
-            <a class="dropdown-item" href="/downloads/telescopes">Telescope Models</a>
-            {% endif %}
-
-            {% if 'sky' in request.url %}
-            <a class="dropdown-item active" href="/downloads/sky">Sky Models</a>
-            {% else %}
-            <a class="dropdown-item" href="/downloads/sky">Sky Models</a>
-            {% endif %}
-
-            {% if 'scripts' in request.url %}
-            <a class="dropdown-item active" href="/downloads/scripts">Scripts</a>
-            {% else %}
-            <a class="dropdown-item" href="/downloads/scripts">Scripts</a>
-            {% endif %}
+            <h6 class="dropdown-header">Data:</h6> {% if 'telescopes' in request.url %}
+            <a class="dropdown-item active" href="/downloads/telescopes">Telescope Models</a> {% else %}
+            <a class="dropdown-item" href="/downloads/telescopes">Telescope Models</a> {% endif %} {% if 'sky' in request.url %}
+            <a class="dropdown-item active" href="/downloads/sky">Sky Models</a> {% else %}
+            <a class="dropdown-item" href="/downloads/sky">Sky Models</a> {% endif %} {% if 'scripts' in request.url %}
+            <a class="dropdown-item active" href="/downloads/scripts">Scripts</a> {% else %}
+            <a class="dropdown-item" href="/downloads/scripts">Scripts</a> {% endif %}
           </div>
 
 
