@@ -32,8 +32,6 @@
           Documentation</a>
       </li>
 
-
-
       <li class="nav-item">
         <a class="nav-link" href="/faq">
 <i class="fas fa-question-circle"></i>
@@ -51,9 +49,9 @@
           <!-- <div class="dropdown-divider"></div> -->
 
           <h6 class="dropdown-header">Releases:</h6>
-          <a class="dropdown-item" href="/releases/2.7.0">2.7.0</a>
-          <a class="dropdown-item" href="/releases/2.6.1">2.6.1</a>
-          <a class="dropdown-item" href="/releases/2.5.1">2.5.1</a>
+          {% for release in data['releases'].keys() %}
+          <a class="dropdown-item" href="/releases/{{ release }}">OSKAR-{{ release }}</a>
+          {% endfor %}
 
 
           <h6 class="dropdown-header">Data:</h6>
