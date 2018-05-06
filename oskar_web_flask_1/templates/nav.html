@@ -13,28 +13,26 @@
 
         <li class="nav-item">
           <a class={% if request.path=="/" %} "nav-link active"{% else %} "nav-link"{% endif%} href="/">
-                <i class="fas fa-home"></i>
-            Home
+                <i class="fas fa-home"></i> Home
           <span class="sr-only">(current)</span>
         </a>
         </li>
 
         <li class="nav-item">
           <a class={% if request.path=="/start" %} "nav-link active"{% else %} "nav-link"{% endif%} href="/start">
-<i class="fas fa-info-circle"></i>
-              Getting Started</a>
+<i class="fas fa-info-circle"></i> Getting Started
+              </a>
         </li>
 
         <li class="nav-item">
           <a class={% if request.path=="/documentation" %} "nav-link active"{% else %} "nav-link"{% endif%} href="/documentation">
-          <i class="fas fa-file-alt"></i>
-          Documentation</a>
+          <i class="fas fa-file-alt"></i> Documentation
+          </a>
         </li>
 
         <li class="nav-item">
           <a class={% if request.path=="/faq" %} "nav-link active"{% else %} "nav-link"{% endif%} href="/faq">
-<i class="fas fa-question-circle"></i>
-            FAQ</a>
+<i class="fas fa-question-circle"></i> FAQ</a> 
         </li>
 
         <!-- Downloads & Releases -->
@@ -47,8 +45,7 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {% endif %}
 
-            <i class="fas fa-download"></i>
-          Downloads
+            <i class="fas fa-download"></i> Downloads
         </a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
 

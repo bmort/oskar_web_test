@@ -4,9 +4,11 @@ from os.path import join
 from pprint import pprint
 from flask import Flask, render_template
 from datetime import datetime, date
+# from flask_caching import Cache
 
 
 APP = Flask(__name__)
+# CACHE = Cache(APP, config={'CACHE_TYPE': 'simple'})
 
 DATA = {
     "current_release": "2.5.1",
@@ -36,6 +38,7 @@ DATA = {
 
 
 @APP.route('/')
+# @CACHE.cached(timeout=50)
 def home():
     """."""
     now = datetime.now()

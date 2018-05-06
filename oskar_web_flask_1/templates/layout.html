@@ -14,24 +14,32 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/css/fontawesome-all.css" rel="stylesheet">
     <link href="/static/css/starter-template.css" rel="stylesheet">
-
     <link href="/static/css/navbar.css" rel="stylesheet">
+
+    <script type="text/javascript"> (function() {
+        var css = document.createElement('link');
+        css.href = '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css';
+        css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })();
+    </script>
 
     <title>OSKAR</title>
 </head>
 
 <body>
 
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          {% include 'nav.html' %}
+        </div>
+      </div>
 
-
-    <!-- <div class="container"> -->
-    {% include 'nav.html' %}
-    <!-- </div> -->
-
-
-    <main role="main" class="container">
-    {% block body %}{% endblock %}
-    </main>
+      <div class="row">
+        <div class="col-sm">
+          {% block body %}{% endblock %}
+        </div>
+      </div>
+    </div>
 
   <br/>
   <br/>
@@ -43,12 +51,10 @@
         <p class="text-right">OSKAR has been developed at the
             <a href="http://www.oerc.ox.ac.uk/">OeRC</a> under and is
              licensed under the terms of the 3-clause BSD License.</p>
-      <ul class="bd-footer-links">
         <a href="https://github.com/OxfordSKA/OSKAR">
             <p class="text-right">
             <i class="fab fa-github"></i> OSKAR GitHub</p>
         </a>
-      </ul>
       <hr>
     </div>
   </footer>
