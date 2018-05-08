@@ -113,3 +113,7 @@ def scripts():
     """."""
     return render_template('scripts.html',
                            data=DATA)
+
+
+if __name__ == '__main__':
+    APP.run()
