@@ -1,0 +1,8 @@
+---
+# This playbook installs the OSKAR website on Centos 7
+
+- hosts: all
+  become_method: sudo
+  roles:
+    - common
+    - project

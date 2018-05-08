@@ -2,7 +2,7 @@
 import os
 from os.path import join
 from pprint import pprint
-from flask import Flask, render_template
+from flask import Flask, render_template, abort
 from datetime import datetime, date
 # from flask_caching import Cache
 
@@ -51,7 +51,6 @@ def home():
                            data=DATA)
 
 
-
 @APP.route('/faq')
 def faq():
     """."""
@@ -88,6 +87,8 @@ def downloads():
 @APP.route('/downloads/<version>')
 def release(version):
     """."""
+    if version not in DATA['releases'].keys():
+        return 'NOT FOUND'
     return render_template('release.html',
                            data=DATA,
                            version=version)

@@ -1,0 +1,20 @@
+---
+# file: common/tasks/main.yml
+
+- name: Install EPEL-release (Extra packages for Enterprise Linux)
+  become: yes
+  yum:
+    name: epel-release
+    state: latest
+
+- name: Install key packages
+  become: yes
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - git
+    - python-pip
+    - python-devel
+    - gcc
+    - nginx

@@ -1,0 +1,18 @@
+---
+# file: project/tasks/main.yml
+
+- name: Checkout project code
+  git:
+    repo: https://github.com/bmort/oskar_web_test
+    dest: oskar_web.git
+    update: yes
+    version: HEAD
+
+# - name: create inital virtual env
+
+
+- name: Run gunicorn on a virtualenv
+  gunicorn:
+    app: wsgi
+    chdir: oskar_web.git/flask
+    venv: oskar_web.git/flask/venv
