@@ -6,3 +6,4 @@
 site.retry
 /.vagrant/
 **/venv/
+**/*.pyc
