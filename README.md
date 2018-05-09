@@ -2,6 +2,13 @@
 
 Experimental flask website for the OSKAR simulator
 
+## References
+
+- <https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-centos-7>
+- <https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-apps-using-gunicorn-http-server-behind-nginx>
+- <https://stackoverflow.com/questions/49296539/nginx-permission-issues-on-centos-7-with-gunicorn-socket-in-systemd>
+
+
 ## Quickstart
 
 ### Deployment using a Centos 7 VirtualBox VM
@@ -60,3 +67,42 @@ For more details on Ansible inventory files see
 ```bash
 vagrant destroy -f
 ```
+
+
+### Testing the flask app with the development server
+
+SSH into the VM (see above) then:
+
+
+```bash
+cd oskar_web.git
+export FLASK_APP=oskar_web/app.py
+export FLASK_DEBUG=True
+flask run --host 0.0.0.0
+```
+
+Then on the host machine, visit `192.168.199.100:5000` to connect to the Flask
+app in the VM.
+
+### Testing the flask app with gunicorn
+
+
+SSH into the VM (see above) then:
+
+```bash
+cd oskar_web.git/oskar_web
+gunicorn -c gunicorn.cfg.py wsgi
+```
+
+Then on the host machine, visit `192.168.199.100:8000` to connect to the Flask
+app in the VM.
+
+
+### Stress testing with `ab` (Apache HTTP server benchmarking tool)
+
+```bash
+ab -n 500 -c 100 http://192.168.199.100:8000/
+```
+
+* `-n` is the number of requests
+* `-c` is the request concurrency

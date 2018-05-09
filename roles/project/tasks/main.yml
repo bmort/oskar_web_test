@@ -8,11 +8,28 @@
     update: yes
     version: HEAD
 
-# - name: create inital virtual env
+
+- name: Update pip
+  pip:
+    name: pip
+    state: latest
+  become: True
 
 
-- name: Run gunicorn on a virtualenv
+- name: Install virtualenv
+  pip:
+    name: virtualenv
+    state: latest
+  become: True
+
+- name: Install requirements (using virtualenv in the oskar_web.git folder)
+  pip:
+    requirements: /home/vagrant/oskar_web.git/oskar_web/requirements.txt
+    virtualenv: /home/vagrant/oskar_web.git/venv
+
+- name: Run gunicorn
   gunicorn:
     app: wsgi
-    chdir: oskar_web.git/flask
-    venv: oskar_web.git/flask/venv
+    chdir: /home/vagrant/oskar_web.git/oskar_web
+    conf: /home/vagrant/oskar_web.git/oskar_web/gunicorn.cfg.py
+    venv: /home/vagrant/oskar_web.git/venv
