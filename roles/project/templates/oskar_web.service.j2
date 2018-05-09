@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve oskar_web
+After=network.target
+
+[Service]
+User={{ ansible_user }}
+Group=nginx
+WorkingDirectory=/home/{{ ansible_user }}/oskar_web.git/oskar_web
+Environment="PATH=/home/{{ ansible_user }}/oskar_web.git/venv/bin"
+ExecStart=/home/{{ ansible_user }}/oskar_web.git/venv/bin/gunicorn -c gunicorn.cfg.py --bind unix:oskar.sock -m 007 wsgi
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,6 @@
 **/__pycache__/
 /static_site/
+/oskar_web/static/releases
 **/.DS_Store
 **/*.pdf
 **/*.png

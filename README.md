@@ -7,7 +7,7 @@ Experimental flask website for the OSKAR simulator
 - <https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-centos-7>
 - <https://www.digitalocean.com/community/tutorials/how-to-deploy-python-wsgi-apps-using-gunicorn-http-server-behind-nginx>
 - <https://stackoverflow.com/questions/49296539/nginx-permission-issues-on-centos-7-with-gunicorn-socket-in-systemd>
-
+- <https://serverfault.com/questions/331256/why-do-i-need-nginx-and-something-like-gunicorn>
 
 ## Quickstart
 

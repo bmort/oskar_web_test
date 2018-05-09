@@ -5,7 +5,7 @@
   become: yes
   yum:
     name: epel-release
-    state: latest
+    state: installed
 
 - name: Install key packages
   become: yes
