@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb|
     vb.name = 'oskar-web-1'
     vb.memory = "2048"
-    vb.cpus = 2
+    vb.cpus = 1
     # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 end

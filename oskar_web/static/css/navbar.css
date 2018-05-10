@@ -1,7 +1,21 @@
 .navbar {
-  margin-top: 5px;
+  margin-top: 0px;
+  background-color: #0e0e3d;
 }
 
-.nav-item .active {
-    border-bottom: 2px solid #5bc0eb;
+/* Add a colored bottom border to active navbar elements */
+.nav-link.active {
+    border-bottom: 2px solid #c5ecfd;
+}
+
+.dropdown-item.active {
+  background: #0e0e3d;
+}
+
+.dropdown-item:hover {
+  background: #d9e7ff;
+}
+
+.dropdown-item:active {
+  background: #8fb8ff;
 }

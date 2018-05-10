@@ -1,0 +1,23 @@
+body {
+  padding-top: 80px;
+}
+
+.text-muted {
+  background-color: #f7faff;
+}
+
+#oskar-welcome {
+  padding-top: 50px;
+}
+
+.oskar-footer {
+  background-color: #f7faff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #0e0e3d18;
+  border-bottom: 1px solid #0e0e3d18;
+}
+
+.oskar-footer p {
+  margin-bottom: 0;
+}
