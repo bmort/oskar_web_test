@@ -10,7 +10,7 @@
         <a href="mailto:oskar@oerc.ox.ac.uk">contact us</a>.
     </div>
 
-    <h1>FAQ</h1>
+    <h1>Frequently Asked Questions</h1>
 
     <br />
     <div class="accordion" id="accordionExample">
@@ -18,16 +18,14 @@
             <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              What computer to I need to run OSKAR?
+              Which operating systems/platforms are supported?
             </button>
           </h5>
             </div>
-
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                    on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                    raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    OSKAR has been tested to compile and run correctly on various recent Linux distributions, and recent versions of macOS and Windows.
+                    If you encounter a problem with OSKAR, please report it to oskar@oerc.ox.ac.uk.
                 </div>
             </div>
         </div>
@@ -35,15 +33,14 @@
             <div class="card-header" id="headingTwo">
                 <h5 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              How to I do x?
+              Does OSKAR require an NVIDIA GPU to work?
             </button>
           </h5>
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                    on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                    raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    No, but simulations will probably run faster if an NVIDIA GPU is available.
+                    Other GPUs are not currently supported.
                 </div>
             </div>
         </div>
@@ -51,15 +48,135 @@
             <div class="card-header" id="headingThree">
                 <h5 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Help my simulation crashes!
+              Which GPU model should I use to run OSKAR simulations?
             </button>
           </h5>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-                    on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table,
-                    raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    OSKAR should be able to run on an NVIDIA GPU with compute capability of 2.0 or higher.
+                    We recommend using a dedicated compute card which has decent double precision floating point performance, as consumer gaming models only work well in single precision (the exception being the Kepler NVIDIA Titans).
+                    Recent OSKAR simulations have been running successfully using NVIDIA's K20 and K40 compute cards in HPC clusters.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                I have multiple NVIDIA GPUs in my computer. Can OSKAR make use of all of them to run faster?
+            </button>
+          </h5>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div class="card-body">
+                    Yes, normally, as the CUDA device(s) to use can be specified at run-time, and work is shared between them by splitting up the sky model and the time samples within a visibility block.
+                    However, see also the answer to the next question to check if using multiple GPUs in this way will be worthwhile for you.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Why does OSKAR run at virtually the same speed regardless of whether I use a sky model containing 10 sources or 100 sources?
+            </button>
+          </h5>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                <div class="card-body">
+                    OSKAR was designed to run simulations efficiently for aperture-array-based telescopes using large sky models containing many thousands of sources across the whole sky. This is done by assigning a GPU thread for every source.
+                    However, as modern GPUs have thousands of processing cores, there must be enough work to do to keep the GPU occupied in this way.
+                    If your sky model contains only 100 sources, you may be using only a few percent of the available hardware, so performance will be relatively poor when using small sky models like this.
+                    It will probably be faster to use CPU cores only for sky models containing fewer than 32 sources.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingSix">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                Why is my image blank?
+            </button>
+          </h5>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                <div class="card-body">
+                    This is commonly caused by allowing the phase centre to go below the horizon during the simulation.
+                    Check your observation parameters (including the phase centre coordinates and start time) and the telescope centre position carefully to make sure the target is visible throughout the whole observation.
+                    There is a helpful coordinate conversion calculator online at <a href="http://www.convertalot.com/celestial_horizon_co-ordinates_calculator.html">http://www.convertalot.com/celestial_horizon_co-ordinates_calculator.html</a>.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingSeven">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                Is OpenCL supported?
+            </button>
+          </h5>
+            </div>
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+                <div class="card-body">
+                    Not currently. However, depending on demand, support for OpenCL could potentially be added in a future release.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingEight">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                Are pre-built binary packages of OSKAR available?
+            </button>
+          </h5>
+            </div>
+            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+                <div class="card-body">
+                    Binary installer packages are now available for macOS and Windows systems.
+                    On Linux, OSKAR still needs to be compiled from source.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingNine">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                I found a bug!
+            </button>
+          </h5>
+            </div>
+            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+                <div class="card-body">
+                    Please let us know by sending an email to oskar@oerc.ox.ac.uk.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTen">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                I found a bug, but I managed to fix it!
+            </button>
+          </h5>
+            </div>
+            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+                <div class="card-body">
+                    Wonderful! Please send us your patch by sending an email to oskar@oerc.ox.ac.uk.
+                    We'll test it and integrate it back into the master branch.
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingEleven">
+                <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                Please could you add this feature?
+            </button>
+          </h5>
+            </div>
+            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordionExample">
+                <div class="card-body">
+                    Please get in touch - we will certainly consider new features but can't guarantee that we can implement all of them.
                 </div>
             </div>
         </div>
