@@ -8,3 +8,5 @@ site.retry
 /.vagrant/
 **/venv/
 **/*.pyc
+/.idea/
+oskar_github_meta.pickle

@@ -1,0 +1,30 @@
+---
+
+- name: Make sure there is a group for the oskar website
+  group:
+    name: oskar-web
+    state: present
+  become: True
+
+- name: Make sure the nginx group exists
+  group:
+    name: nginx
+    state: present
+  become: True
+
+- name: Create user for oskar website
+  user:
+    name: oskar-web
+    generate_ssh_key: yes
+    home: /oskar-web
+    password: $6$m.GFSRsXs3KqqDhA$Y5CZDsfsdQuDCltgJgW/xhXslnrUrl5WggCvxGs1PtGLGyEEd7ZsVg1iNR7ebbs5W38xugCflCXiF9SlXmGZb/
+    groups: oskar-web, nginx, wheel
+  become: True
+
+- name: Add users to oskar website group
+  user:
+    name: "{{ item }}"
+    state: present
+    groups: oskar-web
+  with_items: "{{ users }}"
+  become: True

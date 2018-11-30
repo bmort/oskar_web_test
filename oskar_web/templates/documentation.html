@@ -5,25 +5,26 @@
 <br />
 <h1>Documentation</h1>
 
-<p>This is the documentation for
-<a href="/releases/{{ data['current_release'] }}">
-    OSKAR-{{ data['current_release'] }}</a>, the current version.<br/>
-Documentation for other releases can be found in on <a href="/releases">releases</a> page.
-</p>
-
-
-<ul class="list-group">
-    {% for doc in data['releases'][data['current_release']]['docs'] %}
-    <li class="list-group-item">
-        <a href="{{ doc_path }}/OSKAR-{{ doc_version }}-{{ doc }}.pdf"
-           download="OSKAR-{{ doc_version }}-{{ doc }}.pdf">
-            OSKAR-{{ doc_version }}-{{ doc }}.pdf
-        </a>
-    </li>
-    {% endfor %}
-
-</ul>
-</div>
+{# FIXME(BMo): Get list of doc files...? #}
+{#<p>This is the documentation for#}
+{#<a href="/releases/{{ data['current'] }}">#}
+{#    OSKAR-{{ data['current_release'] }}</a>, the current version.<br/>#}
+{#Documentation for other releases can be found in on <a href="/releases">releases</a> page.#}
+{#</p>#}
+{##}
+{##}
+{#<ul class="list-group">#}
+{#    {% for doc in data['releases'][data['current_release']]['docs'] %}#}
+{#    <li class="list-group-item">#}
+{#        <a href="{{ doc_path }}/OSKAR-{{ doc_version }}-{{ doc }}.pdf"#}
+{#           download="OSKAR-{{ doc_version }}-{{ doc }}.pdf">#}
+{#            OSKAR-{{ doc_version }}-{{ doc }}.pdf#}
+{#        </a>#}
+{#    </li>#}
+{#    {% endfor %}#}
+{##}
+{#</ul>#}
+{#</div>#}
 
 
 {% endblock %}

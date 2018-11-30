@@ -1,0 +1,17 @@
+---
+# This playbook installs the OSKAR website on Centos 7
+# This is a Flask app deployed using gunicorn with nginx as a proxy server
+# Systemd is used to manage both nginx and the gunicorn wsgi flask app
+
+
+- hosts: all
+  become_method: sudo
+  # Override default role variables
+  vars:
+    server_domain_or_ip: 192.168.199.100
+    ansible_users_group: vagrant  # Group of the user which the website is run from.
+  # Run the following roles
+  roles:
+    - users
+    # - common
+    # - project

@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/downloads">Downloads</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ version }}</li>
+    </ol>
+  </nav>
+
+  <div class="jumbotron-fluid">
+
+    <h1 class="display-4">{{ data[version]['data']['name'] }}</h1>
+    <p class="lead">
+      {% if data[version]['draft'] %}
+        <span class="badge badge-danger">Draft</span>
+      {% endif %}
+      {% if data[version]['prerelease'] %}
+        <span class="badge badge-danger">Pre-release</span>
+      {% endif %}
+      <span class="badge badge-dark">
+        Published: {{ data[version]['data']['published_at'] }}
+      </span>
+      <a href="{{ data[version]['data']['html_url'] }}"
+         class="badge badge-primary"><i class="fab fa-github"></i> Github Release page
+      </a>
+
+    </p>
+
+    <div class="card border-dark mb-3">
+      <div class="card-header"><h2>Downloads</h2></div>
+      <div class="card-body">
+        <ul>
+          <li><a href="{{ data[version]['data']['zipball_url'] }}">
+            Source ZIP file</a>
+          </li>
+
+          {% for asset in data[version]['data']['assets'] %}
+            <li>
+              <a href="{{ asset['browser_download_url'] }}">
+                {{ asset['name'] }}
+              </a>
+              <span class="badge badge-info">
+                (updated: {{ asset['updated_at'] }})
+              </span>
+              <span class="badge badge-light">
+                (downloads: {{ asset['download_count'] }})
+              </span>
+            </li>
+          {% endfor %}
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="card border-dark mb-3">
+      <div class="card-body">
+        {{ data[version]['data']['body_html']|safe }}
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}

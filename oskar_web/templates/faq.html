@@ -7,7 +7,7 @@
         <button type="button" class="close" data-dismiss="alert">
             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
         </button>If you cannot find an answer to your question, make sure to
-        <a href="mailto:oskar@oerc.ox.ac.uk">contact us</a>.
+        <a href="mailto:{{ oskar_support_email }}">contact us</a>.
     </div>
 
     <h1>Frequently Asked Questions</h1>
@@ -25,7 +25,7 @@
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                     OSKAR has been tested to compile and run correctly on various recent Linux distributions, and recent versions of macOS and Windows.
-                    If you encounter a problem with OSKAR, please report it to oskar@oerc.ox.ac.uk.
+                    If you encounter a problem with OSKAR, please report it to {{ oskar_support_email  }}
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
             </div>
             <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
                 <div class="card-body">
-                    Please let us know by sending an email to oskar@oerc.ox.ac.uk.
+                    Please let us know by sending an email to {{ oskar_support_email }}.
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
             </div>
             <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
                 <div class="card-body">
-                    Wonderful! Please send us your patch by sending an email to oskar@oerc.ox.ac.uk.
+                    Wonderful! Please send us your patch by sending an email to {{ oskar_support_email }}.
                     We'll test it and integrate it back into the master branch.
                 </div>
             </div>

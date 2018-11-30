@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/Users/bmort/projects/oskar/new_website.git/deploy","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
