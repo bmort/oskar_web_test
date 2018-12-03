@@ -28,7 +28,10 @@ def query_github():
     else:
         _token = os.environ.get('GITHUB_OSKAR_WEB_TOKEN')
         print(_token)
-        gh = github3.login(token=_token)
+        if _token is None:
+            gh = github3.GitHub()
+        else:
+            gh = github3.login(token=_token)
         repository = gh.repository(owner='OxfordSKA',
                                    repository="OSKAR")
         latest_release = repository.latest_release()
