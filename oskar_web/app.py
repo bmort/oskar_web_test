@@ -18,17 +18,12 @@ def query_github():
     import os
     import pickle
     data_file = 'oskar_github_meta.pickle'
-    # if os.path.exists('oskar_github_meta.pickle'):
-    #     print('LOADING DATA')
-    #     load_start = time.time()
-    #     with open(data_file, 'rb') as _file:
-    #         data = pickle.load(_file)
-    #     print('complete in {:4f} s'.format(time.time() - load_start))
-    #     return 'Loaded'
-    # else:
     _token = os.environ.get('GITHUB_OSKAR_WEB_TOKEN')
     print(_token)
-    gh = github3.login(token=_token)
+    if _token is None:
+        gh = github3.GitHub()
+    else:
+        gh = github3.login(token=_token)
     repository = gh.repository(owner='OxfordSKA',
                                repository="OSKAR")
     latest_release = repository.latest_release()
