@@ -18,41 +18,42 @@ def query_github():
     import os
     import pickle
     data_file = 'oskar_github_meta.pickle'
-    if os.path.exists('oskar_github_meta.pickle'):
-        print('LOADING DATA')
-        load_start = time.time()
-        with open(data_file, 'rb') as _file:
-            data = pickle.load(_file)
-        print('complete in {:4f} s'.format(time.time() - load_start))
-        return 'Loaded'
-    else:
-        _token = os.environ.get('GITHUB_OSKAR_WEB_TOKEN')
-        print(_token)
-        gh = github3.login(token=_token)
-        repository = gh.repository(owner='OxfordSKA',
-                                   repository="OSKAR")
-        latest_release = repository.latest_release()
-        print("REMAINING RATE LIMIT...", latest_release.ratelimit_remaining)
+    # if os.path.exists('oskar_github_meta.pickle'):
+    #     print('LOADING DATA')
+    #     load_start = time.time()
+    #     with open(data_file, 'rb') as _file:
+    #         data = pickle.load(_file)
+    #     print('complete in {:4f} s'.format(time.time() - load_start))
+    #     return 'Loaded'
+    # else:
+    _token = os.environ.get('GITHUB_OSKAR_WEB_TOKEN')
+    print(_token)
+    gh = github3.login(token=_token)
+    repository = gh.repository(owner='OxfordSKA',
+                               repository="OSKAR")
+    latest_release = repository.latest_release()
+    print("REMAINING RATE LIMIT...", latest_release.ratelimit_remaining)
 
-        data = dict()
-        data['current'] = dict()
-        data['current']['data'] = latest_release.as_dict()
+    data = dict()
+    # FIXME(BMo) don't save releases under the 'data' key
+    # FIXME(BMo) extract document files from the release and save as
+    #            list or dict in the data.
+    data['repo'] = repository.as_dict()
+    data['current'] = dict()
+    data['current']['data'] = latest_release.as_dict()
 
-        # data['latest_release']['assets'] = []
-        # for asset in latest_release.assets():
-        #     data['latest_release']['assets'].append(asset.as_dict())
-        # latest_release.archive(format='tarball')
+    releases = repository.releases()
+    for _release in releases:
+        release_name = _release.name.replace(' ', '-')
+        data[release_name] = dict()
+        data[release_name]['data'] = _release.as_dict()
 
-        releases = repository.releases()
-        for _release in releases:
-            release_name = _release.name.replace(' ', '-')
-            data[release_name] = dict()
-            data[release_name]['data'] = _release.as_dict()
+    # latest_release.archive(format='tarball')
 
-        print('SAVING DATA')
-        with open(data_file, 'wb') as _file:
-            pickle.dump(data, _file, protocol=pickle.HIGHEST_PROTOCOL)
-        return 'Updated'
+    print('SAVING DATA')
+    with open(data_file, 'wb') as _file:
+        pickle.dump(data, _file, protocol=pickle.HIGHEST_PROTOCOL)
+    return 'Updated'
 
 
 def _load_data():
@@ -105,11 +106,32 @@ def api_release_all_dict():
             data = pickle.load(_file)
         print('complete in {:4f} s'.format(time.time() - load_start))
         for version in data.keys():
-            print(version)
-            data[version]['data']['body'] = '**body**'
-            data[version]['data']['body_html'] = '**body_html**'
-            data[version]['data']['body_text'] = '**body_text**'
+            if 'data' in version:
+                data[version]['data']['body'] = '**body**'
+                data[version]['data']['body_html'] = '**body_html**'
+                data[version]['data']['body_text'] = '**body_text**'
+            if 'body' in version:
+                data[version]['body'] = '**body**'
+                data[version]['body_html'] = '**body_html**'
+                data[version]['body_text'] = '**body_text**'
         return jsonify(data)
+    else:
+        return jsonify(dict(error='data file not found! {}'.format(data_file)))
+
+
+@APP.route('/api/repo')
+def api_repo_dict():
+    """."""
+    import pickle
+    import time
+    data_file = 'oskar_github_meta.pickle'
+    if os.path.exists('oskar_github_meta.pickle'):
+        print('LOADING DATA')
+        load_start = time.time()
+        with open(data_file, 'rb') as _file:
+            data = pickle.load(_file)
+        print('complete in {:4f} s'.format(time.time() - load_start))
+        return jsonify(data['repo'])
     else:
         return jsonify(dict(error='data file not found! {}'.format(data_file)))
 
@@ -153,6 +175,35 @@ def api_release_version_body(version):
             jsonify(dict(error='version not found! {}'.format(data_file)))
         data = data[version]['data']
         return data['body_html']
+    else:
+        return jsonify(dict(error='data file not found! {}'.format(data_file)))
+
+
+@APP.route('/api/release/<version>/docs')
+def api_release_version_docs(version):
+    """."""
+    import pickle
+    import time
+    from bs4 import BeautifulSoup
+    data_file = 'oskar_github_meta.pickle'
+    if os.path.exists('oskar_github_meta.pickle'):
+        print('LOADING DATA')
+        load_start = time.time()
+        with open(data_file, 'rb') as _file:
+            data = pickle.load(_file)
+        print('complete in {:4f} s'.format(time.time() - load_start))
+        if version not in data:
+            jsonify(dict(error='version not found! {}'.format(data_file)))
+        data = data[version]['data']
+        body_html = data['body_html']
+        soup = BeautifulSoup(body_html, "html.parser")
+        docs = []
+        for link in soup.findAll('a'):
+            _href = link.get('href')
+            if '.pdf' in _href:
+                name = _href.split('/')[-1]
+                docs.append((name, _href))
+        return jsonify(dict(docs=docs))
     else:
         return jsonify(dict(error='data file not found! {}'.format(data_file)))
 
